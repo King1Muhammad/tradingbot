@@ -20,7 +20,7 @@ def get_trade_signal(market_data, gemini_api_key):
         
         # Create prompt
         prompt = f"""
-        You are a crypto trading AI assistant. Analyze the following market data and provide a trading recommendation.
+        You are a crypto trading AI assistant. Analyze the following crypto market data and provide a trading recommendation.
         
         Market Data:
         {json.dumps(market_data, indent=2)}
@@ -35,19 +35,19 @@ def get_trade_signal(market_data, gemini_api_key):
         Example response format:
         {{
             "action": "BUY",
-            "market": "SPOT", 
+            "market": "FUTURES", 
             "symbol": "BTCUSDT",
             "confidence": 75,
-            "reason": "Strong upward momentum with high volume"
+            "reason": "Strong upward momentum with high volume and volatility."
         }}
         
-        Be conservative and only recommend BUY/SELL if you have high confidence (>70).
+        Be proactive: If you see any reasonable opportunity, recommend BUY or SELL, and prefer FUTURES for strong trends or for shorting. Only use HOLD if there is truly no opportunity. Consider using FUTURES for both long and short trades, especially if the market is volatile or trending.
         """
         
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {
-                "temperature": 0.2,
+                "temperature": 0.4,
                 "topK": 40,
                 "topP": 0.95,
                 "maxOutputTokens": 1024
