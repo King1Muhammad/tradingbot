@@ -1,0 +1,5 @@
+.env
+futures_daily_stats.json
+trade_log.jsonl
+__pycache__/
+*.pyc
